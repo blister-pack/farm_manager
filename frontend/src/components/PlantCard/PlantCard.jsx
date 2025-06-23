@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useId } from "react";
 import getPlants from "../../hooks/getPlants";
 
 function PlantCard({
+  label,
   onPlantIdChange,
-  plantIdOptions = [1, 2],
+  plantIdOptions = [],
   selectedOption = 1,
+  plantData,
 }) {
-  const plantInfo = getPlants(plantId);
-
+  const id = useId();
   return (
-    <div className="bg-green-300">
+    <div className="bg-green-300 h-400">
+      <label htmlFor={id}>{label}</label>
       <select
         name="plantIdDropdown"
-        id="plantIdDropdown"
+        id={id}
         value={selectedOption}
-        onChange={(e) => {onPlantIdChange && onPlantIdChange(e.target.value)}}>
-        <option value="1">1 - Cherry Tomatoes</option>
-        <option value="2">2 - Lettuce</option>
+        onChange={(e) => {
+          onPlantIdChange && onPlantIdChange(e.target.value);
+        }}
+      >
+        {plantIdOptions.map((plant) => (
+          <option key={plant} value={plant}>
+            {plant}
+          </option>
+        ))}
       </select>
-      <p>Tomatoes</p>
-      <p>Ideal Temp: 20.C - 35.C</p>
-      <p>Ideal Humidity: 30% - 65%</p>
+      <p>{plantData }</p>
     </div>
   );
 }

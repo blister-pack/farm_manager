@@ -19,7 +19,7 @@ plants = {
     },
 }
 
-origins = ["http://localhost:5173/"]
+origins = ["http://localhost:5173"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,6 +28,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/plants")
+def get_plant():
+    return plants
 
 
 @app.get("/plant/{plant_id}")
