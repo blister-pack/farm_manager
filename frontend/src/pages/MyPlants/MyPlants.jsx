@@ -18,6 +18,7 @@ function MyPlants() {
         plantIdOptions={options}
         onPlantIdChange={(plant) => setPlantId(plant)}
         plantData={plantData}
+        selectedOption={plantId}
       />
     </div>
   );
