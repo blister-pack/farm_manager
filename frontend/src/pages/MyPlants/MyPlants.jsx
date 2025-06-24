@@ -9,6 +9,9 @@ function MyPlants() {
   const plantsList = useAllPlants();
   const options = Object.keys(plantsList);
   const plantData = usePlant(plantId);
+  const plantName = plantData?.name;
+  const plantTempRange = plantData?.temperature;
+  const plantHumidityRange = plantData?.humidity;
 
   return (
     <div>

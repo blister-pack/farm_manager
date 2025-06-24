@@ -4,9 +4,12 @@ function useAllPlants() {
     const [plantsList, setPlantsList] = useState({});
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/plants`)
-            .then(response =>  response.json() )
-            .then((response) => setPlantsList(response))
+        const fetchPlantsList = async () => {
+            const response = await fetch(`http://127.0.0.1:8000/plants`);
+            const json = await response.json();
+            setPlantsList(json);
+        };
+        fetchPlantsList();
     }, [])
 
     console.log(plantsList);
