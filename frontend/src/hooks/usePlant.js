@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-function getPlants(plantId) {
-    const [plantData, setPlantData] = useState({});
+function usePlant(plantId) {
+    const [plantData, setPlantData] = useState(null);
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/plant/${plantId}`)
             .then(response =>  response.json())
@@ -13,4 +13,4 @@ function getPlants(plantId) {
     
 }
 
-export default getPlants;
+export default usePlant;

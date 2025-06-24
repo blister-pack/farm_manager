@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function getAllPlants() {
+function useAllPlants() {
     const [plantsList, setPlantsList] = useState({});
 
     useEffect(() => {
@@ -11,10 +11,6 @@ function getAllPlants() {
 
     console.log(plantsList);
     return plantsList;
-    
-
-    
-    
 }
 
-export default getAllPlants
+export default useAllPlants

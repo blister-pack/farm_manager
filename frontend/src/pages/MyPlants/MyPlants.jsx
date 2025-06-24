@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import PlantCard from "../../components/PlantCard/PlantCard";
-import getPlants from "../../hooks/getPlants";
-import getAllPlants from "../../hooks/getAllPlants";
+import usePlant from "../../hooks/usePlant";
+import useAllPlants from "../../hooks/useAllPlants";
 
 function MyPlants() {
   const [plantId, setPlantId] = useState(1);
 
-  const plantInfo = getAllPlants();
-  const options = Object.keys(plantInfo);
-  const plantData = getPlants(plantId);
+  const plantsList = useAllPlants();
+  const options = Object.keys(plantsList);
+  const plantData = usePlant(plantId);
 
   return (
     <div>
@@ -17,7 +17,7 @@ function MyPlants() {
         label="Selected Plant"
         plantIdOptions={options}
         onPlantIdChange={(plant) => setPlantId(plant)}
-        plantData={toString(plantData)}
+        plantData={plantData}
       />
     </div>
   );

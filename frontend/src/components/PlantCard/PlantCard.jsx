@@ -1,5 +1,5 @@
 import React, { useId } from "react";
-import getPlants from "../../hooks/getPlants";
+import usePlant from "../../hooks/usePlant";
 
 function PlantCard({
   label,
@@ -26,7 +26,10 @@ function PlantCard({
           </option>
         ))}
       </select>
-      <p>{plantData }</p>
+      <div>
+
+      <p>{JSON.stringify(plantData?.name)}</p>
+      </div>
     </div>
   );
 }
