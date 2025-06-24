@@ -27,7 +27,9 @@ function PlantCard({
         ))}
       </select>
       <div>
-        <p>{plantData ? plantData.name : "Loading.."}</p>
+        <p>{plantData ? plantData.name : "Loading..."}</p>
+        <p>{plantData ? `Ideal temperature: ${plantData.ideal_temperature[0]} - ${plantData.ideal_temperature[1]} °C` : "Loading..."}</p>
+        <p>{plantData ? `Ideal humidity: ${plantData.ideal_humidity[0]} - ${plantData.ideal_humidity[1]}%` : "Loading..."}</p>
       </div>
     </div>
   );
