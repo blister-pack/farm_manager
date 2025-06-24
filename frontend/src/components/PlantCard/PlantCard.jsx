@@ -27,8 +27,7 @@ function PlantCard({
         ))}
       </select>
       <div>
-
-      <p>{JSON.stringify(plantData?.name)}</p>
+        <p>{plantData ? plantData.name : "Loading.."}</p>
       </div>
     </div>
   );
