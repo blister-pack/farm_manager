@@ -1,7 +1,10 @@
+import array
+from sqlalchemy import table, true
 import uvicorn
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Depends, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from sqlmodel import Field, Session, SQLModel, create_engine, select
 
 
 app = FastAPI()
@@ -28,6 +31,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+class Plant(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
+    min_temperature: int = Field(index=True)
+    max_temperature: int = Field(index=True)
+    min_humidity: int = Field(index=True)
+    max_humidity: int = Field(index=True)
 
 
 @app.get("/plants")
