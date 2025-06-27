@@ -41,9 +41,16 @@ def get_session():
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_db_and_tables()
+    print("DB and tables created")
+    yield
+    print("Shutting down")
+
 # ------------------------------------------------------------#
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 plants = {
     1: {
@@ -67,13 +74,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
-
 
 @app.get("/plants")
 def get_plant():
