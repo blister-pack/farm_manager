@@ -41,6 +41,7 @@ def get_session():
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_db_and_tables()
@@ -48,22 +49,10 @@ async def lifespan(app: FastAPI):
     yield
     print("Shutting down")
 
+
 # ------------------------------------------------------------#
 
 app = FastAPI(lifespan=lifespan)
-
-plants = {
-    1: {
-        "name": "cherry tomatoes",
-        "ideal_temperature": [10, 35],
-        "ideal_humidity": [30, 60],
-    },
-    2: {
-        "name": "lettuce",
-        "ideal_temperature": [5, 30],
-        "ideal_humidity": [30, 70],
-    },
-}
 
 origins = ["http://localhost:5173"]
 
@@ -75,14 +64,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.post("/create_plant")
+def create_plant(plant: Plant, session: SessionDep) -> Plant:
+    session.add(plant)
+    session.commit()
+    session.refresh(plant)
+    return plant
+
+
 @app.get("/plants")
-def get_plant():
+def get_plants(
+    session: SessionDep,
+    offset: int = 0,
+    limit: int = 0,
+) -> list[Plant]:
+    plants = session.exec(select(Plant).offset(offset).limit(limit)).all()
     return plants
 
 
 @app.get("/plant/{plant_id}")
-def get_plant(plant_id: int = Path(gt=0)):
-    return plants[plant_id]
+def get_plant(session: SessionDep, plant_id: int = Path(gt=0)) -> Plant:
+    plant = session.get(Plant, plant_id)
+    if not plant:
+        raise HTTPException(status_code=404, detail="Plant not found")
+    return plant
+
+
+@app.delete("/delete_plant/{plant_id}")
+def delete_plant(session: SessionDep, plant_id: int = Path(gt=0)):
+    plant = session.get(Plant, plant_id)
+    if not plant:
+        raise HTTPException(status_code=404, detail="Hero not found")
+    session.delete(plant)
+    session.commit()
+    return {"ok": True}
 
 
 if __name__ == "__main__":
