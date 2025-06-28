@@ -30,12 +30,12 @@ function PlantCard({
         <p>{plantData ? plantData.name : "Loading..."}</p>
         <p>
           {plantData
-            ? `Ideal temperature: ${plantData.ideal_temperature[0]} - ${plantData.ideal_temperature[1]} °C`
+            ? `Ideal temperature: ${plantData.min_temperature} - ${plantData.max_temperature} °C`
             : "Loading..."}
         </p>
         <p>
           {plantData
-            ? `Ideal humidity: ${plantData.ideal_humidity[0]} - ${plantData.ideal_humidity[1]}%`
+            ? `Ideal humidity: ${plantData.min_humidity} - ${plantData.max_humidity}%`
             : "Loading..."}
         </p>
       </div>

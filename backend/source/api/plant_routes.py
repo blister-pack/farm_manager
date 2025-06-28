@@ -19,7 +19,7 @@ def create_plant(plant: Plant, session: SessionDep) -> Plant:
 def get_plants(
     session: SessionDep,
     offset: int = 0,
-    limit: int = 0,
+    limit: int = 10,
 ) -> list[Plant]:
     plants = session.exec(select(Plant).offset(offset).limit(limit)).all()
     return plants
