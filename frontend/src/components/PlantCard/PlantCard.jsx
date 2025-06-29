@@ -1,7 +1,6 @@
 import React, { useId } from "react";
 import usePlant from "../../hooks/usePlant";
 
-// ff
 function PlantCard({
   label,
   onPlantIdChange,
