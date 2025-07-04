@@ -1,5 +1,4 @@
 import React, { useId } from "react";
-import usePlant from "../../hooks/usePlant";
 
 function PlantCard({
   label,
@@ -30,12 +29,12 @@ function PlantCard({
         <p>{plantData ? plantData.name : "Loading..."}</p>
         <p>
           {plantData
-            ? `Ideal temperature: ${plantData.min_temperature} - ${plantData.max_temperature} °C`
+            ? `Ideal temperature: ${plantData.min_temperature} °C - ${plantData.max_temperature} °C`
             : "Loading..."}
         </p>
         <p>
           {plantData
-            ? `Ideal humidity: ${plantData.min_humidity} - ${plantData.max_humidity}%`
+            ? `Ideal humidity: ${plantData.min_humidity}% - ${plantData.max_humidity}%`
             : "Loading..."}
         </p>
       </div>

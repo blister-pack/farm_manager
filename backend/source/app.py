@@ -1,4 +1,3 @@
-import uvicorn
 from fastapi import FastAPI
 from source.api import plant_routes
 from source.core.config import lifespan, setup_cors
