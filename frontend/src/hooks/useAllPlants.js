@@ -12,7 +12,7 @@ function useAllPlants() {
         fetchPlantsList();
     }, [])
 
-    console.log(plantsList);
+    console.log("plants list ",plantsList);
     return plantsList;
 }
 

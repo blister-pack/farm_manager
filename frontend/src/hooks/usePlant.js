@@ -11,7 +11,7 @@ function usePlant(plantId) {
         fetchPlantData();
     }, [plantId])
 
-    console.log(plantData);
+    console.log("plant data ",plantData);
     return plantData;
 }
 

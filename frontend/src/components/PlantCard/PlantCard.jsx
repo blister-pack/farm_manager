@@ -9,7 +9,7 @@ function PlantCard({
 }) {
   const id = useId();
   return (
-    <div className="bg-green-300 h-400">
+    <div className="bg-green-300 h-50">
       <label htmlFor={id}>{label}</label>
       <select
         name="plantIdDropdown"
@@ -20,8 +20,8 @@ function PlantCard({
         }}
       >
         {plantIdOptions.map((plant) => (
-          <option key={plant} value={plant}>
-            {plant}
+          <option key={plant.id} value={plant.id}>
+            {plant.name}
           </option>
         ))}
       </select>

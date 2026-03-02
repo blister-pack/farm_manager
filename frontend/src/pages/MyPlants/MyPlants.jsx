@@ -7,8 +7,12 @@ function MyPlants() {
   const [plantId, setPlantId] = useState(1);
 
   const plantsList = useAllPlants();
-  const options = Object.keys(plantsList);
+  const options = plantsList;
   const plantData = usePlant(plantId);
+
+  if (!plantsList) {
+    return <div>"Plants list loading"</div>;
+  }
 
   return (
     <div>
